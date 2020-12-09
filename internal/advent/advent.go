@@ -16,17 +16,22 @@ type dailyProblem struct {
 }
 
 //WriteResult takes result as a string and writes/overwrites the content to a result.txt file
-func (d *dailyProblem) WriteResult(result string) {
-	fmt.Printf("Result for Day %d, the %s Problem: %v", d.day, d.name, result)
+func (d *dailyProblem) WriteResult(results []string) {
 	fileName := fmt.Sprintf("resources/results/result%d.txt", d.day)
 	resultFile, err := os.OpenFile(fileName, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
 	if err != nil {
 		fmt.Sprintf(err.Error())
 		return
 	}
-	resultFile.WriteString(result)
+
+	for i, result := range results {
+		fmt.Printf("Result for Day %d, Part %d, the %s Problem: %v\n", d.day, i+1, d.name, result)
+		resultFile.WriteString(result+"\n")
+		
+	}
+
 	if err := resultFile.Close(); err != nil {
-		fmt.Sprintf(err.Error())
+		fmt.Print(err.Error())
 		return
 	}
 }
