@@ -13,7 +13,7 @@ type ReportRepair struct {
 func (r *ReportRepair) Solve() {
 	r.day = 1
 	r.name = "Report Repair"
-	input := parseInput(r.GetInputFile())
+	input := IntsFromStrings(r.GetInputFile())
 	if len(input) == 0 {
 		return
 	}
@@ -21,18 +21,6 @@ func (r *ReportRepair) Solve() {
 	results[0] = strconv.Itoa(fixExpenseReport(input, 2020))
 	results[1] = strconv.Itoa(fixExpenseReportPart2(input))
 	r.WriteResult(results)
-}
-
-func parseInput(inputLines []string) []int {
-	input := make([]int, len(inputLines))
-	for _, line := range inputLines {
-		intValue, err := strconv.Atoi(line)
-		if err != nil {
-			return []int{}
-		}
-		input = append(input, intValue)
-	}
-	return input
 }
  
 func fixExpenseReport(input []int, target int) int {

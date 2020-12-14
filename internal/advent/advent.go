@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 )
 
 type Problem interface {
@@ -25,7 +26,7 @@ func (d *dailyProblem) WriteResult(results []string) {
 	}
 
 	for i, result := range results {
-		fmt.Printf("Result for Day %d, Part %d, the %s Problem: %v\n", d.day, i+1, d.name, result)
+		fmt.Printf("Result for Day %d, the %s Problem, Part %d, : %v\n", d.day, d.name, i+1, result)
 		resultFile.WriteString(result+"\n")
 		
 	}
@@ -55,4 +56,17 @@ func (d *dailyProblem) GetInputFile() []string {
 	inputFile.Close()
 
 	return lines
+}
+
+//
+func IntsFromStrings(inputLines []string) []int {
+	input := make([]int, len(inputLines))
+	for i, line := range inputLines {
+		intValue, err := strconv.Atoi(line)
+		if err != nil {
+			return []int{}
+		}
+		input[i] = intValue
+	}
+	return input
 }
