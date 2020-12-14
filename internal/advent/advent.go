@@ -58,7 +58,7 @@ func (d *dailyProblem) GetInputFile() []string {
 	return lines
 }
 
-//
+//IntsFromStrings takes a string array and returns array of those strings converted to ints
 func IntsFromStrings(inputLines []string) []int {
 	input := make([]int, len(inputLines))
 	for i, line := range inputLines {

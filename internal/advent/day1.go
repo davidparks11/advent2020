@@ -35,7 +35,6 @@ func fixExpenseReport(input []int, target int) int {
 			return complement * expense
 		}
 	}
-
 	return 0
 }
 
