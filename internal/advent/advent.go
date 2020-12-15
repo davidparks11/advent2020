@@ -37,8 +37,8 @@ func (d *dailyProblem) WriteResult(results []string) {
 	}
 }
 
-//GetInputFile reads an input.txt file and returns its contents separated by lines as a string array
-func (d *dailyProblem) GetInputFile() []string {
+//GetInputLines reads an input.txt file and returns its contents separated by lines as a string array
+func (d *dailyProblem) GetInputLines() []string {
 	fileName := fmt.Sprintf("resources/inputs/input%d.txt", d.day)
 	inputFile, err := os.Open(fileName)
 	if err != nil {

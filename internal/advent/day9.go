@@ -16,7 +16,7 @@ type EncodingError struct {
 func (e *EncodingError) Solve() {
 	e.day = 9
 	e.name = "Encoding Error"
-	input := IntsFromStrings(e.GetInputFile())
+	input := IntsFromStrings(e.GetInputLines())
 	results := make([]string, 2)
 	result1 := findXMASDataWeakness(input)
 	results[0] = strconv.Itoa(result1)
@@ -68,6 +68,7 @@ func findXMASDataWeaknessPart2(target int, input []int) int {
 	//break if runningSum < target && endSumIndex = len(input) - 1
 	for runningSum > target || endSumIndex != inputLength - 1 {
 		if runningSum == target {
+
 			smallest := input[startSumIndex]
 			largest := input[startSumIndex]
 			for i := startSumIndex + 1; i < endSumIndex; i++ {

@@ -8,6 +8,7 @@ func main() {
 	problems := []advent.Problem {
 		&advent.ReportRepair{},
 		&advent.EncodingError{},
+		&advent.PasswordPhilosophy{},
 	}
 	for _, problem := range problems {
 		problem.Solve()

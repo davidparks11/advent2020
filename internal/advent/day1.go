@@ -13,7 +13,7 @@ type ReportRepair struct {
 func (r *ReportRepair) Solve() {
 	r.day = 1
 	r.name = "Report Repair"
-	input := IntsFromStrings(r.GetInputFile())
+	input := IntsFromStrings(r.GetInputLines())
 	if len(input) == 0 {
 		return
 	}
