@@ -17,9 +17,9 @@ func (r *ReportRepair) Solve() {
 	if len(input) == 0 {
 		return
 	}
-	results := make([]string, 2)
-	results[0] = strconv.Itoa(fixExpenseReport(input, 2020))
-	results[1] = strconv.Itoa(fixExpenseReportPart2(input))
+	var results []string
+	results = append(results, strconv.Itoa(fixExpenseReport(input, 2020)))
+	results = append(results, strconv.Itoa(fixExpenseReportPart2(input)))
 	r.WriteResult(results)
 }
  

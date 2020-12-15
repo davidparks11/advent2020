@@ -1,7 +1,6 @@
 package advent
 
 import (
-	"fmt"
 	"strconv"
 )
 
@@ -17,10 +16,10 @@ func (e *EncodingError) Solve() {
 	e.day = 9
 	e.name = "Encoding Error"
 	input := IntsFromStrings(e.GetInputLines())
-	results := make([]string, 2)
+	var results []string
 	result1 := findXMASDataWeakness(input)
-	results[0] = strconv.Itoa(result1)
-	results[1] = strconv.Itoa(findXMASDataWeaknessPart2(result1, input))
+	results = append(results, strconv.Itoa(result1))
+	results = append(results, strconv.Itoa(findXMASDataWeaknessPart2(result1, input)))
 	e.WriteResult(results)
 }
 
@@ -54,7 +53,6 @@ func findXMASDataWeakness(input []int) int {
 }
 
 func findXMASDataWeaknessPart2(target int, input []int) int {
-	fmt.Println("finding sum for target: ", target)
 	inputLength := len(input)
 	if inputLength < 2 {
 		return -1

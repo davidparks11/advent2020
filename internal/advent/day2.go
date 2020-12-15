@@ -20,13 +20,12 @@ func (p *PasswordPhilosophy) Solve() {
 	p.day = 2
 	p.name = "PasswordPhilosophy"
 	input := p.GetInputLines()
-	results := make([]string, 2)
-	results[0] = strconv.Itoa(p.validPassWordCount(input))
-
+	var results []string
+	results = append(results, strconv.Itoa(p.validPassWordCount(input)))
+	results = append(results, strconv.Itoa(p.validPassWordCountPart2(input)))
 	p.WriteResult(results)
 
 }
-
 
 func (p *PasswordPhilosophy) validPassWordCount(input []string) int {
 	validPasswordCount := 0
@@ -58,3 +57,29 @@ func (p *PasswordPhilosophy) validPassWordCount(input []string) int {
 	return validPasswordCount
 }
 
+func (p *PasswordPhilosophy) validPassWordCountPart2(input []string) int {
+	validPasswordCount := 0
+	hyphenIndex := 0
+	colonIndex := 1
+	var firstPos int64
+	var secondPos int64
+	var policyChar uint8
+	usedFirst := false
+	usedSecond := false
+	//Errors are ignored assuming all input is correctly formatted
+	for _, inputLine := range input {
+		hyphenIndex = strings.Index(inputLine, "-")
+		colonIndex = strings.Index(inputLine, ":")
+		firstPos, _ = strconv.ParseInt(inputLine[:hyphenIndex], 10, 8)
+		secondPos, _ = strconv.ParseInt(inputLine[hyphenIndex+1:colonIndex - 2], 10, 0)
+		policyChar = inputLine[colonIndex-1]
+		password := inputLine[colonIndex+2:]
+		usedFirst = password[firstPos-1] == policyChar
+		usedSecond = password[secondPos-1] == policyChar
+		//password is not 0 indexed ;)
+		if usedFirst != usedSecond {
+			validPasswordCount++
+		}
+	}
+	return validPasswordCount
+}
