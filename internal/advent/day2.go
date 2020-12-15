@@ -5,11 +5,6 @@ import (
 	"strings"
 )
 
-const minUsageIndex = 0
-const maxUsageIndex = 2
-const characterIndex = 4
-const startPassWordIndex = 7
-
 var _ Problem = &PasswordPhilosophy{}
 
 type PasswordPhilosophy struct {
@@ -18,7 +13,7 @@ type PasswordPhilosophy struct {
 
 func (p *PasswordPhilosophy) Solve() {
 	p.day = 2
-	p.name = "PasswordPhilosophy"
+	p.name = "Password Philosophy"
 	input := p.GetInputLines()
 	var results []string
 	results = append(results, strconv.Itoa(p.validPassWordCount(input)))

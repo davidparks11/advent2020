@@ -7,8 +7,9 @@ import (
 func main() {
 	problems := []advent.Problem {
 		&advent.ReportRepair{},
-		&advent.EncodingError{},
 		&advent.PasswordPhilosophy{},
+		&advent.TobogganTrajectory{},
+		&advent.EncodingError{},
 	}
 	for _, problem := range problems {
 		problem.Solve()
