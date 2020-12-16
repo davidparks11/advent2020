@@ -14,9 +14,6 @@ func (r *ReportRepair) Solve() {
 	r.day = 1
 	r.name = "Report Repair"
 	input := IntsFromStrings(r.GetInputLines())
-	if len(input) == 0 {
-		return
-	}
 	var results []string
 	results = append(results, strconv.Itoa(fixExpenseReport(input, 2020)))
 	results = append(results, strconv.Itoa(fixExpenseReportPart2(input)))

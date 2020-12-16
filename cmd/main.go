@@ -9,6 +9,7 @@ func main() {
 		&advent.ReportRepair{},
 		&advent.PasswordPhilosophy{},
 		&advent.TobogganTrajectory{},
+		&advent.PassportProcessing{},
 		&advent.EncodingError{},
 	}
 	for _, problem := range problems {
