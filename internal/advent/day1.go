@@ -19,7 +19,7 @@ func (r *ReportRepair) Solve() {
 	results = append(results, strconv.Itoa(fixExpenseReportPart2(input)))
 	r.WriteResult(results)
 }
- 
+
 func fixExpenseReport(input []int, target int) int {
 	expenses := make(map[int]bool, len(input))
 	for _, v := range input {
@@ -37,7 +37,7 @@ func fixExpenseReport(input []int, target int) int {
 
 func fixExpenseReportPart2(input []int) int {
 	expenses := make(map[int]bool, len(input))
-	for _, v  := range input {
+	for _, v := range input {
 		expenses[v] = true
 	}
 
@@ -49,5 +49,3 @@ func fixExpenseReportPart2(input []int) int {
 	}
 	return 0
 }
-
-

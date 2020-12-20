@@ -102,7 +102,7 @@ func (p *PassportProcessing) getValidPassportCountPart2(passportData []string) i
 			//validate passports
 			for field, fieldValue := range requireFields {
 				if fieldValue == "" || !p.isValidField(field, fieldValue) {
-				valid = false
+					valid = false
 				}
 				//reset required field
 				requireFields[field] = ""

@@ -84,8 +84,8 @@ func (b *BinaryBoarding) getMissingSeat(boardingPasses []string) int {
 				max -= (max - min + 1) / 2
 			}
 		}
-		currentID := currentID+min
-		if currentID < lowestID  || i == 0 {
+		currentID := currentID + min
+		if currentID < lowestID || i == 0 {
 			lowestID = currentID
 		} else if currentID > highestID {
 			highestID = currentID

@@ -64,7 +64,7 @@ func findXMASDataWeaknessPart2(target int, input []int) int {
 	runningSum := input[startSumIndex] + input[endSumIndex]
 
 	//break if runningSum < target && endSumIndex = len(input) - 1
-	for runningSum > target || endSumIndex != inputLength - 1 {
+	for runningSum > target || endSumIndex != inputLength-1 {
 		if runningSum == target {
 
 			smallest := input[startSumIndex]
@@ -80,7 +80,7 @@ func findXMASDataWeaknessPart2(target int, input []int) int {
 			return smallest + largest
 		}
 		//check if start and end are next to each other, increment both
-		if runningSum > target && startSumIndex == endSumIndex - 1 {
+		if runningSum > target && startSumIndex == endSumIndex-1 {
 			runningSum -= input[startSumIndex]
 			startSumIndex++
 			endSumIndex++

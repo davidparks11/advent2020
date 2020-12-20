@@ -36,7 +36,7 @@ func (p *PasswordPhilosophy) validPassWordCount(input []string) int {
 		hyphenIndex = strings.Index(inputLine, "-")
 		colonIndex = strings.Index(inputLine, ":")
 		minUsage, _ = strconv.ParseInt(inputLine[:hyphenIndex], 10, 8)
-		maxUsage, _ = strconv.ParseInt(inputLine[hyphenIndex+1:colonIndex - 2], 10, 0)
+		maxUsage, _ = strconv.ParseInt(inputLine[hyphenIndex+1:colonIndex-2], 10, 0)
 		policyChar = inputLine[colonIndex-1]
 		password := inputLine[colonIndex+2:]
 		for i := 0; i < len(password); i++ {
@@ -66,7 +66,7 @@ func (p *PasswordPhilosophy) validPassWordCountPart2(input []string) int {
 		hyphenIndex = strings.Index(inputLine, "-")
 		colonIndex = strings.Index(inputLine, ":")
 		firstPos, _ = strconv.ParseInt(inputLine[:hyphenIndex], 10, 8)
-		secondPos, _ = strconv.ParseInt(inputLine[hyphenIndex+1:colonIndex - 2], 10, 0)
+		secondPos, _ = strconv.ParseInt(inputLine[hyphenIndex+1:colonIndex-2], 10, 0)
 		policyChar = inputLine[colonIndex-1]
 		password := inputLine[colonIndex+2:]
 		usedFirst = password[firstPos-1] == policyChar

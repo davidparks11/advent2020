@@ -12,7 +12,7 @@ type Problem interface {
 }
 
 type dailyProblem struct {
-	day int
+	day  int
 	name string
 }
 
@@ -27,8 +27,8 @@ func (d *dailyProblem) WriteResult(results []string) {
 
 	for i, result := range results {
 		fmt.Printf("Result for Day %d, the %s Problem, Part %d, : %v\n", d.day, d.name, i+1, result)
-		resultFile.WriteString(result+"\n")
-		
+		resultFile.WriteString(result + "\n")
+
 	}
 
 	if err := resultFile.Close(); err != nil {
