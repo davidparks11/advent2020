@@ -10,6 +10,7 @@ func main() {
 		&advent.PasswordPhilosophy{},
 		&advent.TobogganTrajectory{},
 		&advent.PassportProcessing{},
+		&advent.BinaryBoarding{},
 		&advent.EncodingError{},
 	}
 	for _, problem := range problems {
