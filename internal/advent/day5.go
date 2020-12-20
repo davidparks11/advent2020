@@ -1,7 +1,6 @@
 package advent
 
 import (
-	"fmt"
 	"strconv"
 )
 
