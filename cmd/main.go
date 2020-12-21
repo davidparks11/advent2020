@@ -12,6 +12,7 @@ func main() {
 		&advent.PassportProcessing{},
 		&advent.BinaryBoarding{},
 		&advent.CustomCustoms{},
+		&advent.HandheldHalting{},
 		&advent.EncodingError{},
 	}
 	for _, problem := range problems {
