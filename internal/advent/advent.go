@@ -94,7 +94,7 @@ func (p *problemSet) WriteResultFile(day int) {
 	if resultStrings, ok := results.([]string); ok {
 		_, err = resultFile.WriteString(strings.Join(resultStrings, "\n"))
 	} else {
-		_, err = resultFile.WriteString(fmt.Sprint(problem.Solve()))
+		_, err = resultFile.WriteString(fmt.Sprint(results))
 	}
 	if err != nil {
 		log.Fatal(err)
