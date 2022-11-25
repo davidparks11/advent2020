@@ -1,11 +1,21 @@
-package advent
+package day3
 
-import "strconv"
+import (
+	"strconv"
 
-var _ Problem = &TobogganTrajectory{}
+	. "github.com/davidparks11/advent2020/internal/problem"
+)
 
-type TobogganTrajectory struct {
-	dailyProblem
+var _ Problem = &tobogganTrajectory{}
+
+type tobogganTrajectory struct {
+	DailyProblem
+}
+
+func New() Problem {
+	return &tobogganTrajectory{
+		DailyProblem{Day: 3},
+	}
 }
 
 type slope struct {
@@ -13,9 +23,8 @@ type slope struct {
 	y int
 }
 
-func (t *TobogganTrajectory) Solve() {
-	t.day = 3
-	t.name = "Toboggan Trajectory"
+func (t *tobogganTrajectory) Solve() interface{} {
+	t.Day = 3
 	input := t.GetInputLines()
 	var results []string
 	results = append(results, strconv.Itoa(t.treeCountInPath(1, 3, input)))
@@ -32,10 +41,11 @@ func (t *TobogganTrajectory) Solve() {
 		part2Results *= t.treeCountInPath(slope.y, slope.x, input)
 	}
 	results = append(results, strconv.Itoa(part2Results))
-	t.WriteResult(results)
+
+	return results
 }
 
-func (t *TobogganTrajectory) treeCountInPath(slopeY, slopeX int, treeLines []string) int {
+func (t *tobogganTrajectory) treeCountInPath(slopeY, slopeX int, treeLines []string) int {
 	treeCollisions := 0
 	const (
 		tree = uint8('#')

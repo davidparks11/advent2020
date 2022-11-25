@@ -1,28 +1,35 @@
-package advent
+package day2
 
 import (
 	"strconv"
 	"strings"
+
+	. "github.com/davidparks11/advent2020/internal/problem"
 )
 
-var _ Problem = &PasswordPhilosophy{}
+var _ Problem = &passwordPhilosophy{}
 
-type PasswordPhilosophy struct {
-	dailyProblem
+type passwordPhilosophy struct {
+	DailyProblem
 }
 
-func (p *PasswordPhilosophy) Solve() {
-	p.day = 2
-	p.name = "Password Philosophy"
+func New() Problem {
+	return &passwordPhilosophy{
+		DailyProblem{Day: 2},
+	}
+}
+
+func (p *passwordPhilosophy) Solve() interface{} {
+	p.Day = 2
 	input := p.GetInputLines()
 	var results []string
 	results = append(results, strconv.Itoa(p.validPassWordCount(input)))
 	results = append(results, strconv.Itoa(p.validPassWordCountPart2(input)))
-	p.WriteResult(results)
 
+	return results
 }
 
-func (p *PasswordPhilosophy) validPassWordCount(input []string) int {
+func (p *passwordPhilosophy) validPassWordCount(input []string) int {
 	validPasswordCount := 0
 	hyphenIndex := 0
 	colonIndex := 1
@@ -52,7 +59,7 @@ func (p *PasswordPhilosophy) validPassWordCount(input []string) int {
 	return validPasswordCount
 }
 
-func (p *PasswordPhilosophy) validPassWordCountPart2(input []string) int {
+func (p *passwordPhilosophy) validPassWordCountPart2(input []string) int {
 	validPasswordCount := 0
 	hyphenIndex := 0
 	colonIndex := 1

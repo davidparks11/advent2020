@@ -1,25 +1,32 @@
-package advent
+package day8
 
 import (
 	"strconv"
+
+	. "github.com/davidparks11/advent2020/internal/problem"
 )
 
-var _ Problem = &HandheldHalting{}
+var _ Problem = &handheldHalting{}
 
-type HandheldHalting struct {
-	dailyProblem
+type handheldHalting struct {
+	DailyProblem
 }
 
-func (h *HandheldHalting) Solve() {
-	h.day = 8
-	h.name = "Handheld Halting"
+func New() Problem {
+	return &handheldHalting{
+		DailyProblem{Day: 8},
+	}
+}
+
+func (h *handheldHalting) Solve() interface{} {
+	h.Day = 8
 	input := h.GetInputLines()
 	var results []string
 	results = append(results, strconv.Itoa(h.infiniteLoopFinder(input)))
-	h.WriteResult(results)
+	return results
 }
 
-func (h *HandheldHalting) infiniteLoopFinder(programLines []string) int {
+func (h *handheldHalting) infiniteLoopFinder(programLines []string) int {
 	accVal := 0
 	runOrder := make(map[int]bool, len(programLines))
 	currentInstruction := ""
@@ -44,4 +51,3 @@ func (h *HandheldHalting) infiniteLoopFinder(programLines []string) int {
 	}
 	return accVal
 }
-

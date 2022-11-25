@@ -1,23 +1,30 @@
-package advent
+package day1
 
 import (
 	"strconv"
+
+	. "github.com/davidparks11/advent2020/internal/problem"
 )
 
-var _ Problem = &ReportRepair{}
+var _ Problem = &reportRepair{}
 
-type ReportRepair struct {
-	dailyProblem
+type reportRepair struct {
+	DailyProblem
 }
 
-func (r *ReportRepair) Solve() {
-	r.day = 1
-	r.name = "Report Repair"
+func New() Problem {
+	return &reportRepair{
+		DailyProblem{Day: 1},
+	}
+}
+
+func (r *reportRepair) Solve() interface{} {
+	r.Day = 1
 	input := IntsFromStrings(r.GetInputLines())
 	var results []string
 	results = append(results, strconv.Itoa(fixExpenseReport(input, 2020)))
 	results = append(results, strconv.Itoa(fixExpenseReportPart2(input)))
-	r.WriteResult(results)
+	return results
 }
 
 func fixExpenseReport(input []int, target int) int {

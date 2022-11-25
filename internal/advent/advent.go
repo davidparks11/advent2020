@@ -1,72 +1,106 @@
 package advent
 
 import (
-	"bufio"
 	"fmt"
+	"log"
 	"os"
-	"strconv"
+	"strings"
+
+	"github.com/davidparks11/advent2020/internal/problem"
+	"github.com/davidparks11/advent2020/internal/problem/day1"
+	"github.com/davidparks11/advent2020/internal/problem/day2"
+	"github.com/davidparks11/advent2020/internal/problem/day3"
+	"github.com/davidparks11/advent2020/internal/problem/day4"
+	"github.com/davidparks11/advent2020/internal/problem/day5"
+	"github.com/davidparks11/advent2020/internal/problem/day6"
+	"github.com/davidparks11/advent2020/internal/problem/day7"
+	"github.com/davidparks11/advent2020/internal/problem/day8"
+	"github.com/davidparks11/advent2020/internal/problem/day9"
 )
 
-type Problem interface {
-	Solve()
+type problemSet map[int]problem.Problem
+
+func NewProblemSet() *problemSet {
+	problems := []problem.Problem{
+		day1.New(),
+		day2.New(),
+		day3.New(),
+		day4.New(),
+		day5.New(),
+		day6.New(),
+		day7.New(),
+		day8.New(),
+		day9.New(),
+	}
+
+	p := make(problemSet)
+	for _, problem := range problems {
+		p[problem.GetDay()] = problem
+	}
+
+	return &p
 }
 
-type dailyProblem struct {
-	day  int
-	name string
+func (p *problemSet) Get(day int) problem.Problem {
+	problem, found := (*p)[day]
+	if !found {
+		log.Fatalf("problem not found in problem set: %d", day)
+	}
+	return problem
+}
+
+const Christmas = 25
+
+func (p *problemSet) Solve(writeToConsole bool, day int) {
+	if day != 0 {
+		if writeToConsole {
+			p.PrintToConsole(day)
+		} else {
+			p.WriteResultFile(day)
+		}
+	} else {
+		for day := 1; day <= Christmas; day++ {
+			if _, found := (*p)[day]; found {
+				if writeToConsole {
+					p.PrintToConsole(day)
+				} else {
+					p.WriteResultFile(day)
+				}
+			}
+		}
+	}
+}
+
+func (p *problemSet) PrintToConsole(day int) {
+	results := p.Get(day).Solve()
+	if resultStrings, ok := results.([]string); ok {
+		log.Printf("Result for Day %d:\n%s\n", day, strings.Join(resultStrings, "\n"))
+	} else {
+		log.Printf("Result for Day %d: %v\n", day, results)
+	}
 }
 
 //WriteResult takes result as a string and writes/overwrites the content to a result.txt file
-func (d *dailyProblem) WriteResult(results []string) {
-	fileName := fmt.Sprintf("resources/results/result%d.txt", d.day)
+func (p *problemSet) WriteResultFile(day int) {
+	problem := p.Get(day)
+
+	fileName := fmt.Sprintf("resources/results/result%d.txt", day)
 	resultFile, err := os.OpenFile(fileName, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
 	if err != nil {
-		fmt.Sprintf(err.Error())
-		return
+		log.Fatal(err)
 	}
 
-	for i, result := range results {
-		fmt.Printf("Result for Day %d, the %s Problem, Part %d, : %v\n", d.day, d.name, i+1, result)
-		resultFile.WriteString(result + "\n")
-
+	results := problem.Solve()
+	if resultStrings, ok := results.([]string); ok {
+		_, err = resultFile.WriteString(strings.Join(resultStrings, "\n"))
+	} else {
+		_, err = resultFile.WriteString(fmt.Sprint(problem.Solve()))
 	}
-
-	if err := resultFile.Close(); err != nil {
-		fmt.Print(err.Error())
-		return
-	}
-}
-
-//GetInputLines reads an input.txt file and returns its contents separated by lines as a string array
-func (d *dailyProblem) GetInputLines() []string {
-	fileName := fmt.Sprintf("resources/inputs/input%d.txt", d.day)
-	inputFile, err := os.Open(fileName)
 	if err != nil {
-		fmt.Print(err.Error())
-		return nil
+		log.Fatal(err)
 	}
 
-	scanner := bufio.NewScanner(inputFile)
-	scanner.Split(bufio.ScanLines)
-
-	var lines []string
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
+	if err = resultFile.Close(); err != nil {
+		log.Fatal(err)
 	}
-	inputFile.Close()
-
-	return lines
-}
-
-//IntsFromStrings takes a string array and returns array of those strings converted to ints
-func IntsFromStrings(inputLines []string) []int {
-	input := make([]int, len(inputLines))
-	for i, line := range inputLines {
-		intValue, err := strconv.Atoi(line)
-		if err != nil {
-			return []int{}
-		}
-		input[i] = intValue
-	}
-	return input
 }

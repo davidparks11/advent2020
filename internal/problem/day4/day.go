@@ -1,30 +1,37 @@
-package advent
+package day4
 
 import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	. "github.com/davidparks11/advent2020/internal/problem"
 )
 
 const fieldLength = 3
 
-var _ Problem = &PassportProcessing{}
+var _ Problem = &passportProcessing{}
 
-type PassportProcessing struct {
-	dailyProblem
+type passportProcessing struct {
+	DailyProblem
 }
 
-func (p *PassportProcessing) Solve() {
-	p.day = 4
-	p.name = "Passport Processing"
+func New() Problem {
+	return &passportProcessing{
+		DailyProblem{Day: 4},
+	}
+}
+
+func (p *passportProcessing) Solve() interface{} {
+	p.Day = 4
 	input := p.GetInputLines()
 	var results []string
 	results = append(results, strconv.Itoa(p.getValidPassportCount(input)))
 	results = append(results, strconv.Itoa(p.getValidPassportCountPart2(input)))
-	p.WriteResult(results)
+	return results
 }
 
-func (p *PassportProcessing) getValidPassportCount(passportData []string) int {
+func (p *passportProcessing) getValidPassportCount(passportData []string) int {
 	validPassportCount := 0
 	requireFields := map[string]bool{
 		"ecl": false,
@@ -66,7 +73,7 @@ func (p *PassportProcessing) getValidPassportCount(passportData []string) int {
 	return validPassportCount
 }
 
-func (p *PassportProcessing) getValidPassportCountPart2(passportData []string) int {
+func (p *passportProcessing) getValidPassportCountPart2(passportData []string) int {
 	validPassportCount := 0
 	valid := true
 	nextSpace := 0
@@ -145,7 +152,7 @@ var (
 	validPID = regexp.MustCompile(`^([0-9]{9})$`)
 )
 
-func (p *PassportProcessing) isValidField(fieldName string, fieldValue string) bool {
+func (p *passportProcessing) isValidField(fieldName string, fieldValue string) bool {
 	switch fieldName {
 	case "byr":
 		return validBYR(fieldValue)

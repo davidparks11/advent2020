@@ -1,26 +1,33 @@
-package advent
+package day9
 
 import (
 	"strconv"
+
+	. "github.com/davidparks11/advent2020/internal/problem"
 )
 
 const xmasPreambleLength = 25
 
-var _ Problem = &EncodingError{}
+var _ Problem = &encodingError{}
 
-type EncodingError struct {
-	dailyProblem
+type encodingError struct {
+	DailyProblem
 }
 
-func (e *EncodingError) Solve() {
-	e.day = 9
-	e.name = "Encoding Error"
+func New() Problem {
+	return &encodingError{
+		DailyProblem{Day: 9},
+	}
+}
+
+func (e *encodingError) Solve() interface{} {
+	e.Day = 9
 	input := IntsFromStrings(e.GetInputLines())
 	var results []string
 	result1 := findXMASDataWeakness(input)
 	results = append(results, strconv.Itoa(result1))
 	results = append(results, strconv.Itoa(findXMASDataWeaknessPart2(result1, input)))
-	e.WriteResult(results)
+	return results
 }
 
 //findXMASDataWeakness checks for invalid 'XMAS' encoding. The first 25 integers are called the preamble and server to

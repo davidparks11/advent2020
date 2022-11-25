@@ -1,26 +1,33 @@
-package advent
+package day6
 
 import (
 	"strconv"
+
+	. "github.com/davidparks11/advent2020/internal/problem"
 )
 
-var _ Problem = &CustomCustoms{}
+var _ Problem = &customCustoms{}
 
-type CustomCustoms struct {
-	dailyProblem
+type customCustoms struct {
+	DailyProblem
 }
 
-func (c *CustomCustoms) Solve() {
-	c.day = 6
-	c.name = "Custom Customs"
+func New() Problem {
+	return &customCustoms{
+		DailyProblem{Day: 6},
+	}
+}
+
+func (c *customCustoms) Solve() interface{} {
+	c.Day = 6
 	input := c.GetInputLines()
 	var results []string
 	results = append(results, strconv.Itoa(c.getCustomsYesCount(input)))
 	results = append(results, strconv.Itoa(c.getCustomsGroupYesCount(input)))
-	c.WriteResult(results)
+	return results
 }
 
-func (c *CustomCustoms) getCustomsYesCount(passengerAnswers []string) int {
+func (c *customCustoms) getCustomsYesCount(passengerAnswers []string) int {
 	answerCount := len(passengerAnswers)
 	yesCount := 0
 	yesMap := make(map[rune]bool, 26)
@@ -37,13 +44,13 @@ func (c *CustomCustoms) getCustomsYesCount(passengerAnswers []string) int {
 			yesCount += len(yesMap)
 			yesMap = make(map[rune]bool, 26)
 		}
-	} 
+	}
 	return yesCount
 }
 
-func (c *CustomCustoms) getCustomsGroupYesCount(passengerAnswers []string) int {
+func (c *customCustoms) getCustomsGroupYesCount(passengerAnswers []string) int {
 	answerCount := len(passengerAnswers)
-	yesCount := 0 
+	yesCount := 0
 	groupTotal := 0
 	yesMap := make(map[rune]int, 26)
 	for i, answerLine := range passengerAnswers {
@@ -60,7 +67,7 @@ func (c *CustomCustoms) getCustomsGroupYesCount(passengerAnswers []string) int {
 			for _, answerCount := range yesMap {
 				if answerCount == groupTotal {
 					yesCount++
-				} 
+				}
 			}
 			yesMap = make(map[rune]int, 26)
 			groupTotal = 0
