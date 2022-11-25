@@ -1,8 +1,6 @@
 package day1
 
 import (
-	"strconv"
-
 	. "github.com/davidparks11/advent2020/internal/problem"
 )
 
@@ -21,9 +19,9 @@ func New() Problem {
 func (r *reportRepair) Solve() interface{} {
 	r.Day = 1
 	input := IntsFromStrings(r.GetInputLines())
-	var results []string
-	results = append(results, strconv.Itoa(fixExpenseReport(input, 2020)))
-	results = append(results, strconv.Itoa(fixExpenseReportPart2(input)))
+	var results []int
+	results = append(results, fixExpenseReport(input, 2020))
+	results = append(results, fixExpenseReportPart2(input))
 	return results
 }
 

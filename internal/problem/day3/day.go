@@ -1,8 +1,6 @@
 package day3
 
 import (
-	"strconv"
-
 	. "github.com/davidparks11/advent2020/internal/problem"
 )
 
@@ -26,26 +24,30 @@ type slope struct {
 func (t *tobogganTrajectory) Solve() interface{} {
 	t.Day = 3
 	input := t.GetInputLines()
-	var results []string
-	results = append(results, strconv.Itoa(t.treeCountInPath(1, 3, input)))
+	var results []int
+	results = append(results, treeCountInPath(1, 3, input))
+	results = append(results, treeCountProductWholeSlope(input))
 
-	part2Slopes := []slope{
+	return results
+}
+
+func treeCountProductWholeSlope(input []string) int {
+	slopes := []slope{
 		{x: 1, y: 1},
 		{x: 3, y: 1},
 		{x: 5, y: 1},
 		{x: 7, y: 1},
 		{x: 1, y: 2},
 	}
-	part2Results := 1
-	for _, slope := range part2Slopes {
-		part2Results *= t.treeCountInPath(slope.y, slope.x, input)
+	result := 1
+	for _, slope := range slopes {
+		result *= treeCountInPath(slope.y, slope.x, input)
 	}
-	results = append(results, strconv.Itoa(part2Results))
 
-	return results
+	return result
 }
 
-func (t *tobogganTrajectory) treeCountInPath(slopeY, slopeX int, treeLines []string) int {
+func treeCountInPath(slopeY, slopeX int, treeLines []string) int {
 	treeCollisions := 0
 	const (
 		tree = uint8('#')

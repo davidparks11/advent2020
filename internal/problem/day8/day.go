@@ -21,12 +21,12 @@ func New() Problem {
 func (h *handheldHalting) Solve() interface{} {
 	h.Day = 8
 	input := h.GetInputLines()
-	var results []string
-	results = append(results, strconv.Itoa(h.infiniteLoopFinder(input)))
+	var results []int
+	results = append(results, infiniteLoopFinder(input))
 	return results
 }
 
-func (h *handheldHalting) infiniteLoopFinder(programLines []string) int {
+func infiniteLoopFinder(programLines []string) int {
 	accVal := 0
 	runOrder := make(map[int]bool, len(programLines))
 	currentInstruction := ""

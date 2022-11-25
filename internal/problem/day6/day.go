@@ -1,8 +1,6 @@
 package day6
 
 import (
-	"strconv"
-
 	. "github.com/davidparks11/advent2020/internal/problem"
 )
 
@@ -21,13 +19,13 @@ func New() Problem {
 func (c *customCustoms) Solve() interface{} {
 	c.Day = 6
 	input := c.GetInputLines()
-	var results []string
-	results = append(results, strconv.Itoa(c.getCustomsYesCount(input)))
-	results = append(results, strconv.Itoa(c.getCustomsGroupYesCount(input)))
+	var results []int
+	results = append(results, getCustomsYesCount(input))
+	results = append(results, getCustomsGroupYesCount(input))
 	return results
 }
 
-func (c *customCustoms) getCustomsYesCount(passengerAnswers []string) int {
+func getCustomsYesCount(passengerAnswers []string) int {
 	answerCount := len(passengerAnswers)
 	yesCount := 0
 	yesMap := make(map[rune]bool, 26)
@@ -48,7 +46,7 @@ func (c *customCustoms) getCustomsYesCount(passengerAnswers []string) int {
 	return yesCount
 }
 
-func (c *customCustoms) getCustomsGroupYesCount(passengerAnswers []string) int {
+func getCustomsGroupYesCount(passengerAnswers []string) int {
 	answerCount := len(passengerAnswers)
 	yesCount := 0
 	groupTotal := 0

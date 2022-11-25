@@ -22,14 +22,14 @@ func New() Problem {
 func (p *passwordPhilosophy) Solve() interface{} {
 	p.Day = 2
 	input := p.GetInputLines()
-	var results []string
-	results = append(results, strconv.Itoa(p.validPassWordCount(input)))
-	results = append(results, strconv.Itoa(p.validPassWordCountPart2(input)))
+	var results []int
+	results = append(results, validPassWordCount(input))
+	results = append(results, validPassWordCountPart2(input))
 
 	return results
 }
 
-func (p *passwordPhilosophy) validPassWordCount(input []string) int {
+func validPassWordCount(input []string) int {
 	validPasswordCount := 0
 	hyphenIndex := 0
 	colonIndex := 1
@@ -59,7 +59,7 @@ func (p *passwordPhilosophy) validPassWordCount(input []string) int {
 	return validPasswordCount
 }
 
-func (p *passwordPhilosophy) validPassWordCountPart2(input []string) int {
+func validPassWordCountPart2(input []string) int {
 	validPasswordCount := 0
 	hyphenIndex := 0
 	colonIndex := 1

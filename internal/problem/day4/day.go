@@ -25,13 +25,13 @@ func New() Problem {
 func (p *passportProcessing) Solve() interface{} {
 	p.Day = 4
 	input := p.GetInputLines()
-	var results []string
-	results = append(results, strconv.Itoa(p.getValidPassportCount(input)))
-	results = append(results, strconv.Itoa(p.getValidPassportCountPart2(input)))
+	var results []int
+	results = append(results, getValidPassportCount(input))
+	results = append(results, getValidPassportCountPart2(input))
 	return results
 }
 
-func (p *passportProcessing) getValidPassportCount(passportData []string) int {
+func getValidPassportCount(passportData []string) int {
 	validPassportCount := 0
 	requireFields := map[string]bool{
 		"ecl": false,
@@ -73,7 +73,7 @@ func (p *passportProcessing) getValidPassportCount(passportData []string) int {
 	return validPassportCount
 }
 
-func (p *passportProcessing) getValidPassportCountPart2(passportData []string) int {
+func getValidPassportCountPart2(passportData []string) int {
 	validPassportCount := 0
 	valid := true
 	nextSpace := 0
@@ -108,7 +108,7 @@ func (p *passportProcessing) getValidPassportCountPart2(passportData []string) i
 		if dataLine == "" || i == len(passportData)-1 {
 			//validate passports
 			for field, fieldValue := range requireFields {
-				if fieldValue == "" || !p.isValidField(field, fieldValue) {
+				if fieldValue == "" || !isValidField(field, fieldValue) {
 					valid = false
 				}
 				//reset required field
@@ -152,7 +152,7 @@ var (
 	validPID = regexp.MustCompile(`^([0-9]{9})$`)
 )
 
-func (p *passportProcessing) isValidField(fieldName string, fieldValue string) bool {
+func isValidField(fieldName string, fieldValue string) bool {
 	switch fieldName {
 	case "byr":
 		return validBYR(fieldValue)

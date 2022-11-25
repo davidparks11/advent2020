@@ -1,8 +1,6 @@
 package day5
 
 import (
-	"strconv"
-
 	. "github.com/davidparks11/advent2020/internal/problem"
 )
 
@@ -21,9 +19,9 @@ func New() Problem {
 func (b *binaryBoarding) Solve() interface{} {
 	b.Day = 5
 	input := b.GetInputLines()
-	var results []string
-	results = append(results, strconv.Itoa(b.getHighestSeatID(input)))
-	results = append(results, strconv.Itoa(b.getMissingSeat(input)))
+	var results []int
+	results = append(results, getHighestSeatID(input))
+	results = append(results, getMissingSeat(input))
 	return results
 }
 
@@ -32,7 +30,7 @@ const (
 	rowSeatDataIndex = 7
 )
 
-func (b *binaryBoarding) getHighestSeatID(boardingPasses []string) int {
+func getHighestSeatID(boardingPasses []string) int {
 	highestID := 0
 	currentID := 0
 	min := 0
@@ -65,8 +63,8 @@ func (b *binaryBoarding) getHighestSeatID(boardingPasses []string) int {
 	return highestID
 }
 
-//getMissingSeat is part 2 of day 5's problem. Finds the gap in ids where ids[n] - ids[n+1] != 1
-func (b *binaryBoarding) getMissingSeat(boardingPasses []string) int {
+// getMissingSeat is part 2 of day 5's problem. Finds the gap in ids where ids[n] - ids[n+1] != 1
+func getMissingSeat(boardingPasses []string) int {
 	ids := make(map[int]bool, len(boardingPasses))
 	currentID := 0
 	highestID := 0

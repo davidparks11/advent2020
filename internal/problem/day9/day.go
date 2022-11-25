@@ -1,8 +1,6 @@
 package day9
 
 import (
-	"strconv"
-
 	. "github.com/davidparks11/advent2020/internal/problem"
 )
 
@@ -23,16 +21,16 @@ func New() Problem {
 func (e *encodingError) Solve() interface{} {
 	e.Day = 9
 	input := IntsFromStrings(e.GetInputLines())
-	var results []string
+	var results []int
 	result1 := findXMASDataWeakness(input)
-	results = append(results, strconv.Itoa(result1))
-	results = append(results, strconv.Itoa(findXMASDataWeaknessPart2(result1, input)))
+	results = append(results, result1)
+	results = append(results, findXMASDataWeaknessPart2(result1, input))
 	return results
 }
 
-//findXMASDataWeakness checks for invalid 'XMAS' encoding. The first 25 integers are called the preamble and server to
-//validate the next (26th) number. Every subsequent number checks the previous 25 for validity. A number is considered
-//valid if two of the previous numbers sum to the current number.
+// findXMASDataWeakness checks for invalid 'XMAS' encoding. The first 25 integers are called the preamble and server to
+// validate the next (26th) number. Every subsequent number checks the previous 25 for validity. A number is considered
+// valid if two of the previous numbers sum to the current number.
 func findXMASDataWeakness(input []int) int {
 	validators := make(map[int]bool, xmasPreambleLength)
 	for i := 0; i < xmasPreambleLength; i++ {
