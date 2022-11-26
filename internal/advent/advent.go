@@ -8,6 +8,7 @@ import (
 
 	"github.com/davidparks11/advent2020/internal/problem"
 	"github.com/davidparks11/advent2020/internal/problem/day1"
+	"github.com/davidparks11/advent2020/internal/problem/day10"
 	"github.com/davidparks11/advent2020/internal/problem/day2"
 	"github.com/davidparks11/advent2020/internal/problem/day3"
 	"github.com/davidparks11/advent2020/internal/problem/day4"
@@ -31,6 +32,7 @@ func NewProblemSet() *problemSet {
 		day7.New(),
 		day8.New(),
 		day9.New(),
+		day10.New(),
 	}
 
 	p := make(problemSet)
