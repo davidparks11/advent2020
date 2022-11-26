@@ -24,6 +24,7 @@ func (h *handyHaversacks) Solve() interface{} {
 	input := h.GetInputLines()
 	var results []int
 	results = append(results, bagTypesContainingGold(input))
+	results = append(results, bagsInsideOfBagType(input))
 	return results
 }
 
@@ -41,10 +42,29 @@ func bagTypesContainingGold(bagRules []string) int {
 	}
 
 	processed := make(map[string]struct{})
-	return recurseCount("shiny gold", rulesSet, processed) - 1
+	return recurseCountBagTypes("shiny gold", rulesSet, processed) - 1
 }
 
-func recurseCount(name string, rules map[string][]string, processed map[string]struct{}) int {
+func bagsInsideOfBagType(bagRules []string) int {
+	rulesSet := make(map[string]map[string]int)
+	for _, rule := range bagRules {
+		parent, children := parseRule(rule)
+		rulesSet[parent] = children
+	}
+
+	return recurseCountBags("shiny gold", rulesSet) - 1
+}
+
+func recurseCountBags(name string, rules map[string]map[string]int) int {
+	count := 1
+
+	for child, amount := range rules[name] {
+		count += amount * recurseCountBags(child, rules)
+	}
+	return count
+}
+
+func recurseCountBagTypes(name string, rules map[string][]string, processed map[string]struct{}) int {
 	parents := rules[name]
 	count := 1
 	for _, parent := range parents {
@@ -53,7 +73,7 @@ func recurseCount(name string, rules map[string][]string, processed map[string]s
 		} else {
 			processed[parent] = struct{}{}
 		}
-		count += recurseCount(parent, rules, processed)
+		count += recurseCountBagTypes(parent, rules, processed)
 	}
 
 	return count
